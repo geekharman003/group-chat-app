@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="main">
+      <div id="login-form-container">
+        <form id="login-form" onsubmit="handleLoginForm(event)">
+          <div class="form-title">Login</div>
+
+          <div class="form-body">
+            <div class="input-group">
+              <label for="email">Email:</label>
+              <input
+                required
+                id="email"
+                class="form-input"
+                type="email"
+                name="email"
+                />
+              </div>
+              
+              <div class="input-group">
+                <label for="password">Password:</label>
+                <input
+                required
+                id="password"
+                class="form-input"
+                type="password"
+                name="password"
+                minlength="8"
+                />
+              </div>
+              
+          </div>
+
+          <button class="submit-button" type="submit">
+            <span class="button-text">Login</span>
+          </button>
+          <p id="message"></p>
+
+          <div class="form-footer">
+            <a class="signup-link" href="./signup.html">
+              New User? <span>Signup</span>
+            </a>
+            <br />
+            <br />
+          </div>
+        </form>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"
+      integrity="sha512-h9644v03pHqrIHThkvXhB2PJ8zf5E9IyVnrSfZg8Yj8k4RsO4zldcQc4Bi9iVLUCCsqNY0b4WXVV4UB+wbWENA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
