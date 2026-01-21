@@ -47,7 +47,6 @@ a {
   min-height: 100vh;
 }
 
-
 /* signup and login page css */
 #signup-form-container,
 #login-form-container,
@@ -143,4 +142,86 @@ a {
 .submit-button:hover {
   background: rgb(79, 132, 179);
   transform: translateY(-1px);
+}
+
+/* #main css */
+#container {
+  display: flex;
+  padding: 1rem;
+  gap: 10px;
+  height: 90vh;
+}
+
+#chats {
+  position: relative;
+  /* overflow-y: scroll; */
+  width: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #131929;
+  padding: 10px;
+}
+
+#chats-header {
+  position: sticky;
+  top: 0;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: white;
+  background-color: gray;
+  margin-bottom: 10px;
+}
+
+.chat {
+  display: flex;
+  gap: 10px;
+  color: white;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.2s ease-in;
+}
+
+.chat:hover {
+  background-color: grey;
+  cursor: pointer;
+}
+
+.chat-profile {
+  display: flex;
+  align-items: center;
+}
+
+#messages {
+  position: relative;
+  overflow: scroll;
+  background-color: #131929;
+  padding: 1rem;
+  width: 100%;
+  color: white;
+}
+
+#messages-header {
+  position: sticky;
+  padding: 10px;
+  top: 0;
+  font-weight: bold;
+  background-color: grey;
+}
+
+#message-box-container {
+  position: sticky;
+  bottom: 0;
+  right: 0;
+  margin-top: 1rem;
+}
+
+#message-box {
+  width: 99%;
+}
+
+#send-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
