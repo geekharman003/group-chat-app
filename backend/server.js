@@ -1,15 +1,19 @@
 import "dotenv/config";
-import { authRouter } from "./routes/auth.routes.js";
+import connectToDatabase from "./database/mongodb.js";
+import express from "express";
 import cors from "cors";
 
-import express from "express";
+import { authRouter } from "./routes/auth.routes.js";
+import messageRouter from "./routes/message.routes.js";
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.use("/api/auth", authRouter);
+app.use("/api/messages", messageRouter);
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, async () => {
+  await connectToDatabase();
   console.log(`server is running on port ${process.env.PORT}`);
 });

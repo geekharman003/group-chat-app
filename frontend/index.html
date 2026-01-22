@@ -276,12 +276,32 @@
         </div>
 
         <div id="message-box-container">
-            <input type="text" id="message-box" name="message_box" />
-            <div id="send-btn">
-                <img width="35" height="35" src="assets/images/send-svgrepo-com.svg" alt="send btn">
-            </div>
+          <form id="message-form" onsubmit="handleMessageForm(event)">
+            <input
+              type="text"
+              id="message-box"
+              name="message_box"
+              placeholder="hi there 👋"
+            />
+          </form>
+          <div id="send-btn">
+            <img
+              width="35"
+              height="35"
+              src="assets/images/send-svgrepo-com.svg"
+              alt="send btn"
+            />
+          </div>
         </div>
       </div>
     </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"
+      integrity="sha512-h9644v03pHqrIHThkvXhB2PJ8zf5E9IyVnrSfZg8Yj8k4RsO4zldcQc4Bi9iVLUCCsqNY0b4WXVV4UB+wbWENA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="script.js"></script>
   </body>
 </html>
