@@ -65,3 +65,48 @@ const handleMessageForm = async (event) => {
     event.target.reset();
   }
 };
+
+const loadAllMessages = async () => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const res = await axios.get(`${BASE_URL}/api/messages`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+
+    const { messages } = res.data;
+    console.log(messages);
+
+    const messagesContainer = document.getElementById("chat-messages");
+
+    messages.forEach((msg) => {
+      const { message, createdAt } = msg;
+
+      addMessageToUi(message, createdAt, messagesContainer);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const addMessageToUi = (message, createdAt, parent) => {
+  const messageElem = document.createElement("span");
+  messageElem.classList = "message";
+
+  const time = new Date(createdAt).toLocaleString("en-IN", {
+    timeStyle: "short",
+  });
+
+  messageElem.innerHTML = `
+  ${message}
+  <span class="message-time">${time}</span>`;
+
+  parent.appendChild(messageElem);
+};
+
+
+// setInterval(async () => {
+//     const messagesContainer = document.getElementById("chat-messages");
+//     messagesContainer.innerHTML = "";
+//   await loadAllMessages();
+// }, 2000);

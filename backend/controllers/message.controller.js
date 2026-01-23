@@ -17,9 +17,9 @@ const saveMessage = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "message saved successfully",
-      data:{
-        message
-      }
+      data: {
+        message,
+      },
     });
   } catch (error) {
     res.status(500).json({
@@ -29,4 +29,30 @@ const saveMessage = async (req, res) => {
   }
 };
 
-export { saveMessage };
+const getAllMessages = async (req, res) => {
+  try {
+    const messages = await ChatMessages.find({ user: req.user._id }).select(
+      "user message createdAt",
+    );
+
+    if (!messages.length) {
+      return res.status(404).json({
+        success: false,
+        message: "no message found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      messages,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export { saveMessage, getAllMessages };
