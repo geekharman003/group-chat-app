@@ -61,5 +61,7 @@ const handleMessageForm = async (event) => {
     console.log(res.data);
   } catch (error) {
     console.error(error);
+  } finally {
+    event.target.reset();
   }
 };
