@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../css/styles.css" />
   </head>
   <body>
     <div id="main">
-      <div id="login-form-container">
-        <form id="login-form" onsubmit="handleLoginForm(event)">
-          <div class="form-title">Login</div>
+      <div id="signin-form-container">
+        <form id="signin-form" onsubmit="handleSignInForm(event)">
+          <div class="form-title">Sign In</div>
 
           <div class="form-body">
             <div class="input-group">
@@ -39,12 +39,12 @@
           </div>
 
           <button class="submit-button" type="submit">
-            <span class="button-text">Login</span>
+            <span class="button-text">Sign In</span>
           </button>
           <p id="message"></p>
 
           <div class="form-footer">
-            <a class="signup-link" href="./signup.html">
+            <a class="signup-link" href="../html/signup.html">
               New User? <span>Signup</span>
             </a>
             <br />
@@ -59,6 +59,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="script.js"></script>
+    <script src="../js/script.js"></script>
   </body>
 </html>

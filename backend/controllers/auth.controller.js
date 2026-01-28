@@ -39,14 +39,14 @@ const signUp = async (req, res) => {
 const signIn = async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "email and password are required",
-      });
-    }
+  if (!email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "email and password are required",
+    });
+  }
 
+  try {
     const user = await User.findOne({ email }).select("_id email password");
 
     if (!user) {

@@ -22,7 +22,7 @@ const handleSignUpForm = async (event) => {
   }
 };
 
-const handleLoginForm = async (event) => {
+const handleSignInForm = async (event) => {
   event.preventDefault();
 
   const email = event.target.email.value;
@@ -35,7 +35,7 @@ const handleLoginForm = async (event) => {
     });
     console.log(res.data);
 
-    window.location.href = "/frontend/index.html";
+    window.location.href = "/html/index.html";
     localStorage.setItem("token", res.data.token);
   } catch (error) {
     console.error(error);

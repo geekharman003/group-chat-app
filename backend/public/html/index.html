@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chats</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
   </head>
   <body>
     <div id="container">
@@ -167,15 +167,13 @@
           <p>Amit</p>
         </div>
       </div>
-        <div id="messages">
+      <div id="messages">
         <div id="messages-header">
           <p>message header</p>
-          </div>
-          <div id="chat-messages">
-    
-          </div>
+        </div>
+        <div id="chat-messages"></div>
         <div id="message-box-container">
-          <form id="message-form" onsubmit="handleMessageForm(event)">
+          <form id="message-form" onsubmit="sendMessage(event)">
             <input
               type="text"
               id="message-box"
@@ -184,14 +182,15 @@
             />
           </form>
           <div id="send-btn">
-            <img
+            <!-- <img
               width="35"
               height="35"
               src="assets/images/send-svgrepo-com.svg"
               alt="send btn"
-            />
+            /> -->
           </div>
         </div>
+      </div>
     </div>
 
     <script
@@ -200,26 +199,46 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", async () => {
-        const token = localStorage.getItem("token");
 
-        if (token) {
-          try {
-            // verify the token
-            const res = await axios.get("http://localhost:3000/api", {
-              headers: { authorization: `Bearer ${token}` },
-            });
-          await loadAllMessages();
-          } catch (error) {
-            console.log(error);
-            window.location.href = "/frontend/signin.html";
-          }
-        } else {
-          window.location.href = "/frontend/signin.html";
-        }
-      });
+    <script src="../js/verifyToken.js"></script>
+
+    <script>
+      // creates a socket connection with backend
+      const socket = new WebSocket("ws://localhost:3000");
+
+      // when recieves a message from server
+      socket.onmessage = async (event) => {
+        const message = await event.data.text();
+
+        showMessage(message);
+      };
+
+      const sendMessage = (event) => {
+        event.preventDefault();
+
+        const message = event.target.message_box.value;
+
+        console.log(message)
+        socket.send(message);
+      };
+
+      const showMessage = (message) => {
+        const messagesContainer = document.getElementById("chat-messages");
+        const messageElem = document.createElement("span");
+        messageElem.classList = "message";
+
+        messageElem.innerHTML = `
+        ${message}`;
+
+        messagesContainer.appendChild(messageElem);
+      };
     </script>
-    <script src="script.js"></script>
+
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+         await loadAllMessages();
+      });
+    </script> -->
+    <script src="../js/script.js"></script>
   </body>
 </html>

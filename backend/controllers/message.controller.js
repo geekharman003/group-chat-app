@@ -4,14 +4,14 @@ const saveMessage = async (req, res) => {
   const { _id } = req.user;
   const { message } = req.body;
 
-  try {
-    if (!message) {
-      return res.status(400).json({
-        success: false,
-        message: "please provide the message you want to send!",
-      });
-    }
+  if (!message) {
+    return res.status(400).json({
+      success: false,
+      message: "please provide the message you want to send!",
+    });
+  }
 
+  try {
     await ChatMessages.create({ user: _id, message });
 
     res.status(201).json({

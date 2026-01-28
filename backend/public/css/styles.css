@@ -47,9 +47,9 @@ a {
   min-height: 100vh;
 }
 
-/* signup and login page css */
+/* signup and signin page css */
 #signup-form-container,
-#login-form-container,
+#signin-form-container,
 #forgot-form-container,
 #reset-form-container {
   height: 100vh;
@@ -59,7 +59,7 @@ a {
 }
 
 #signup-form,
-#login-form,
+#signin-form,
 #forgot-form,
 #reset-form {
   width: 300px;
@@ -116,14 +116,14 @@ a {
   font-size: 13px;
 }
 
-.login-link,
+.signin-link,
 .signup-link,
 .forgot-link {
   color: black;
   text-decoration: none;
 }
 
-.login-link span,
+.signin-link span,
 .signup-link span,
 .forgot-link span {
   color: blue;
