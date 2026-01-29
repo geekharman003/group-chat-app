@@ -16,6 +16,7 @@ export default (server) => {
   io.on("connection", (socket) => {
     chatHandler(socket, io);
 
+    // for personal chat
     personalChat(socket,io);
   });
 };

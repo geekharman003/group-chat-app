@@ -103,10 +103,3 @@ const addMessageToUi = (message, createdAt, parent) => {
 
   parent.appendChild(messageElem);
 };
-
-
-// setInterval(async () => {
-//     const messagesContainer = document.getElementById("chat-messages");
-//     messagesContainer.innerHTML = "";
-//   await loadAllMessages();
-// }, 2000);
