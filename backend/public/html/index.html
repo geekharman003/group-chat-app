@@ -202,43 +202,43 @@
 
     <script src="../js/verifyToken.js"></script>
 
-    <script>
-      // creates a socket connection with backend
-      const socket = new WebSocket("ws://localhost:3000");
-
-      // when recieves a message from server
-      socket.onmessage = async (event) => {
-        const message = await event.data.text();
-
-        showMessage(message);
-      };
-
-      const sendMessage = (event) => {
-        event.preventDefault();
-
-        const message = event.target.message_box.value;
-
-        console.log(message)
-        socket.send(message);
-      };
-
-      const showMessage = (message) => {
-        const messagesContainer = document.getElementById("chat-messages");
-        const messageElem = document.createElement("span");
-        messageElem.classList = "message";
-
-        messageElem.innerHTML = `
-        ${message}`;
-
-        messagesContainer.appendChild(messageElem);
-      };
-    </script>
 
     <!-- <script>
       document.addEventListener("DOMContentLoaded", async () => {
          await loadAllMessages();
       });
     </script> -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      const sendMessage = (event) => {
+        event.preventDefault();
+
+        const message = event.target.message_box.value;
+
+        socket.emit("chat message", message);
+      };
+
+      socket.on("chat message", (data) => {
+        showMessage(data);
+      });
+
+      const showMessage = (data) => {
+        const messagesContainer = document.getElementById("chat-messages");
+        const messageElem = document.createElement("span");
+        messageElem.classList = "message";
+
+        messageElem.innerHTML = `
+        User id:
+       ${data.userId}
+        Message:
+        ${data.message}`;
+
+        messagesContainer.appendChild(messageElem);
+      };
+    </script>
+
     <script src="../js/script.js"></script>
   </body>
 </html>
