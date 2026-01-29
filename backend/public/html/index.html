@@ -202,7 +202,6 @@
 
     <script src="../js/verifyToken.js"></script>
 
-
     <!-- <script>
       document.addEventListener("DOMContentLoaded", async () => {
          await loadAllMessages();
@@ -210,7 +209,13 @@
     </script> -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      const socket = io();
+      const token = localStorage.getItem("token");
+
+      const socket = io("ws://localhost:3000", {
+        auth: {
+          token,
+        },
+      });
 
       const sendMessage = (event) => {
         event.preventDefault();
@@ -230,8 +235,8 @@
         messageElem.classList = "message";
 
         messageElem.innerHTML = `
-        User id:
-       ${data.userId}
+        User Name:
+       ${data.userName}
         Message:
         ${data.message}`;
 
