@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import socketAuthMiddleware from "./middleware.js";
 import chatHandler from "./handlers/chat.js";
+import personalChat from "./handlers/personalChat.js";
 
 export default (server) => {
   const io = new Server(server, {
@@ -14,5 +15,7 @@ export default (server) => {
 
   io.on("connection", (socket) => {
     chatHandler(socket, io);
+
+    personalChat(socket,io);
   });
 };
