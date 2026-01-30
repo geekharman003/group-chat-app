@@ -74,15 +74,24 @@
         showMessage(data);
       });
 
+      socket.on("recieve-new-message-in-group", (data) => {
+        showMessage(data);
+      });
+
       // sends the message to socket.io server
       const sendMessage = (event) => {
         event.preventDefault();
 
         const message = event.target.message_box.value;
 
-        socket.emit("send-new-message-in-room", {
+        // socket.emit("send-new-message-in-room", {
+        //   message,
+        //   roomName: window.roomName,
+        // });
+
+        socket.emit("send-message-in-group", {
           message,
-          roomName: window.roomName,
+          groupName: window.groupName,
         });
       };
 
@@ -116,15 +125,18 @@
           );
 
           const roomName = [myEmail, email].sort().join("-");
-          console.log(roomName)
+          console.log(roomName);
           window.roomName = roomName;
 
+          window.groupName = roomName;
+
           // emitting the join room event
-          socket.emit("join-room", roomName);
+          // socket.emit("join-room", roomName);
+          socket.emit("join-group", window.groupName);
           emailInput.value = "";
         } catch (error) {
-          if(error.status === 404){
-            console.error(`user with email ${email} not found`)
+          if (error.status === 404) {
+            console.error(`user with email ${email} not found`);
           }
           // console.log(error);
         }

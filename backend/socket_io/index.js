@@ -2,6 +2,7 @@ import { Server } from "socket.io";
 import socketAuthMiddleware from "./middleware.js";
 import chatHandler from "./handlers/chat.js";
 import personalChat from "./handlers/personalChat.js";
+import groupChat from "./handlers/groupChat.js";
 
 export default (server) => {
   const io = new Server(server, {
@@ -17,6 +18,8 @@ export default (server) => {
     chatHandler(socket, io);
 
     // for personal chat
-    personalChat(socket,io);
+    personalChat(socket, io);
+
+    groupChat(socket, io);
   });
 };
