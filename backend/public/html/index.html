@@ -86,7 +86,6 @@
         });
       };
 
-
       // shows the message on DOM
       const showMessage = (data) => {
         const messagesContainer = document.getElementById("chat-messages");
@@ -103,16 +102,32 @@
       };
 
       // joining a group using email
-      const search = (event) => {
+      const search = async (event) => {
+        const myEmail = localStorage.getItem("myEmail");
         const emailInput = document.getElementById("email-input");
         const email = emailInput.value;
 
-        window.roomName = email;
+        try {
+          const res = await axios.post(
+            "http://localhost:3000/api/verify-email",
+            {
+              email,
+            },
+          );
 
+          const roomName = [myEmail, email].sort().join("-");
+          console.log(roomName)
+          window.roomName = roomName;
 
-        // emitting the join room event
-        socket.emit("join-room", email);
-        emailInput.value = "";
+          // emitting the join room event
+          socket.emit("join-room", roomName);
+          emailInput.value = "";
+        } catch (error) {
+          if(error.status === 404){
+            console.error(`user with email ${email} not found`)
+          }
+          // console.log(error);
+        }
       };
     </script>
 

@@ -37,6 +37,7 @@ const handleSignInForm = async (event) => {
 
     window.location.href = "/html/index.html";
     localStorage.setItem("token", res.data.token);
+    localStorage.setItem("myEmail", res.data.user.email);
   } catch (error) {
     console.error(error);
   }

@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
 
 const verifyToken = (req, res) => {
   try {
@@ -29,4 +30,29 @@ const verifyToken = (req, res) => {
   }
 };
 
-export default verifyToken;
+const verifyEmail = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "user not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({
+      success: false,
+      message: e.message,
+    });
+  }
+};
+
+export { verifyToken, verifyEmail };
